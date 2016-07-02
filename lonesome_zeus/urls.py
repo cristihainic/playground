@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from blog.views import index, PageListView, page # ca sa-l un view trebuie sa-l si importam!
 
 urlpatterns = [
+    url(r'^$', index),
+    url(r'^blog/', PageListView.as_view()),
     url(r'^admin/', admin.site.urls),
+    url(r'^hello/', index),
+    url(r'^page/(?P<page_id>[0-9])/$', page),
 ]

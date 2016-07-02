@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title>List pages</title>
+</head>
+    <body>
+        <h2>List of pages</h2>
+        <ul>
+            {% for page in object_list %}
+                <a href="/page/{{page.pk}}"><li>{{ page.title }}</a>, by {{ page.author }}, published on {{ page.date_added }}</li>
+                <p> {{ page.summary }}</p>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
