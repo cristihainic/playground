@@ -19,3 +19,6 @@ def page(request, page_id):
         context={'page': page_obj},
         context_instance=RequestContext(request)
     )
+
+def testare(request):
+    return HttpResponse("Ai creat o noua pagina. Felicitari!")
