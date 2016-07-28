@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+    {% block page_title %} List pages {% endblock %}
+
+    {% block page_heading %}
+    {{ page.title }}
+    {% endblock %}
+
+    {% block content %}
+        <form action="" method="POST"> {% csrf_token %}
+            {{ form.as_p }}
+            <p>
+                <input type="submit" value="Save" class="btn btn-default">
+            </p>
+        </form>
+
+        <br />
+        <p><a class="btn btn-default" href=" {% url "home" %}">Go back home</a></p>
+    {% endblock %}
