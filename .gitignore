@@ -1,4 +1,9 @@
 *.pyc
 .idea/
 myenv/
+db.sqlite3
+__pycache__
+myvenv
+db.sqlite3
+.DS_Store
 
