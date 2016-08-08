@@ -4,22 +4,36 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.utils import timezone
-from .forms import PageForm
+from .forms import PageForm, CommentForm
+import datetime
 
-from .models import Page
+from .models import Page, Comments
 
 class PageListView(ListView):
     model = Page
     template_name = "page_list.html"
 
-def index(request):
-    return HttpResponse("Hello Word!")
+    def get_context_data(self):
+        context = super(PageListView, self).get_context_data()
+        context['this_year'] = datetime.date.today().year
+        return context
+
 
 def page(request, page_id):
     page_obj = Page.objects.get(pk=page_id)
+    form_obj = CommentForm()
+    comments = Comments.objects.filter(page=page_obj)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['page'] = page_id
+        form_obj = CommentForm(data)
+        if form_obj.is_valid():
+            form_obj.instance.page_id = page_id
+            #import ipdb; ipdb.set_trace()
+            form_obj.save()
     return render_to_response(
         "page.html",
-        context={'page': page_obj},
+        context={'page': page_obj, 'this_year': datetime.date.today().year, 'comment_form': form_obj, 'comments': comments,},
         context_instance=RequestContext(request)
     )
 

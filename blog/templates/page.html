@@ -8,8 +8,22 @@
 
     {% block content %}
     {{ page.content }}
-    <br />
-    <br />
-    <br />
+    <br/>
+    <br/>
+        <h3>Comments on this post:</h3>
+    <ul>
+        {% for comment in comments %}
+            <li>{{comment.comment_author}} wrote on
+            {{comment.comment_date}}:
+            {{comment.comment_body}}</li>
+        {% endfor %}
+    </ul>
+        <h3>Post a new comment:</h3>
+    <form action="" method="POST"> {% csrf_token %}
+            {{ comment_form.as_p }}
+            <p>
+                <input type="submit" value="Save" class="btn btn-default">
+            </p>
+    </form>
     <p><a class="btn btn-default" align="right" href=" {% url "home" %}">Go back home</a></p>
     {% endblock %}

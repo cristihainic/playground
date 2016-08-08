@@ -6,7 +6,6 @@ urlpatterns = [
     url(r'^$', PageListView.as_view(), name="home"),
     url(r'^blog/', PageListView.as_view()),
     url(r'^admin/', admin.site.urls),
-    url(r'^hello/', index),
     url(r'^post/(?P<page_id>[0-9]+)/$', page, name="page_detail"),
     url(r'^post/(?P<page_id>[0-9]+)/edit/$', edit_post, name="page_edit"),
     url(r'^new/$', new_post, name="new_post"),
